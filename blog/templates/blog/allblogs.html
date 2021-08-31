@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.87.0">
-    <title>Alex's site</title>
+    <title>Alex's Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
 
@@ -57,7 +57,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <img src="{% static 'alex.jpg' %}" height="32" class="circularimage">
-                <a class="navbar-brand" href="{% url 'home' %}">&nbsp;Alex</a>
+                <a class="navbar-brand" href="/">&nbsp;Alex</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
                     <div class="navbar-nav ml-auto">
                         <!-- <a class="nav-link" href="#">Twitter</a> -->
                         <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-                        <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+                        <a class="nav-link active" href="/blog">Blog</a>
                     </div>
                 </div>
             </div>
@@ -75,45 +75,25 @@
     </header>
 
     <main>
+        <div class="container">
+            <h1 class="text-center pt-3">Welcome to Alex's Blog</h1>
+            <br>
+            <br>
+            <h2>Latest Posts</h2>
+            <hr>
 
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Hi, I'm Alex</h1>
-                    <p class="lead text-muted">Hey, my name is Alex and this is my first Django project.</p>
-                    <p>
-                        <a href="mailto:novaialex44@gmail.com" class="btn btn-primary my-2">Email me</a>
-                    </p>
-                    <!-- <img src="{% static 'alex.jpg' %}" height="300"> -->
-                </div>
-            </div>
-        </section>
+            {% for blog in blogs.all %}
+            <a href="{% url 'detail' blog.id %}">
+                <h3>{{ blog.title }}</h3>
+            </a>
+            {{ blog.pub_date_pretty }}
+            <br>
+            <img class="img-fluid" src="{{ blog.image.url }}" height=300 width=300>
+            <br>
+            <p>{{ blog.summary }}</p>
+            <hr>
+            {% endfor %}
 
-        <div class="album py-5 bg-light">
-            <div class="container">
-
-                <div class="row">
-                    {% for job in jobs.all %}
-                    <div class="col-md-4">
-                        <div class="card shadow-sm">
-                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                                preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg> -->
-                            <img class="card-img-top" src="{{ job.image.url }}" />
-
-                            <div class="card-body">
-                                <p class="card-text">{{ job.summary }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
         </div>
 
     </main>
