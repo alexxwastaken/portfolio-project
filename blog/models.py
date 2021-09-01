@@ -17,3 +17,10 @@ class Blog(models.Model):
 
     def pub_date_pretty(self):
         return self.pub_date.strftime('%b %e %Y')
+
+
+class User(models.Model):
+    user = models.TextField(default=None)
+
+    def __str__(self):
+        return self.user
